@@ -73,7 +73,7 @@ jobs:
       
       - name: Clone Kernel Source
         run: |
-            git clone --depth 1 -b ${{ inputs.branch }} --single-branch https://github.com/WildKernels/Samsung_Kernels.git $CONFIG
+            git clone --depth 1 -b ${{ inputs.branch }} --single-branch https://github.com/niko-dante/SM-X800-Oneui8.git $CONFIG
             
       - name: Set Path Environment Variables
         run: |
