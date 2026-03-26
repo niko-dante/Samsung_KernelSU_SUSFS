@@ -193,7 +193,7 @@ jobs:
           # Apply SUSFS core patch
           patch -p1 < 50_add_susfs_in_gki-${{ inputs.android_version }}-${{ inputs.kernel_version }}.patch || true
           rm -rf 50_add_susfs_in_gki-${{ inputs.android_version }}-${{ inputs.kernel_version }}.patch
-          cp "$KERNEL_PATCHES/samsung/$PATCH_DIR_NAME/"* ./
+          cp "$KERNEL_PATCHES/samsung/${{ env.PATCH_DIR_NAME }}/"* ./
 
           # Fix SUSFS rejects
           for p in *.patch; do
@@ -393,7 +393,7 @@ jobs:
             cp ./kernel-6.6/out/arch/arm64/boot/Image "$ANYKERNEL3/Image"
           elif [[ "${{ inputs.branch }}" == "SM-S926B-Oneui8" ]]; then
             cp ./out/s5e9945_user/dist/Image "$ANYKERNEL3/Image"
-          elif [[ "${{ inputs.branch }}" == "SM-S901E-Oneui8" ]]; then
+          elif [[ "${{ inputs.branch }}" == "SM-S901E-Oneui8" || "${{ inputs.branch }}" == "SM-X800-Oneui8" ]]; then
             cp ./out/msm-waipio-waipio-gki/dist/Image "$ANYKERNEL3/Image"
           else
             echo "Error: Image file not found in any expected location"
