@@ -115,6 +115,7 @@ jobs:
           echo "ANYKERNEL3=$ANYKERNEL3" >> $GITHUB_ENV
           echo "COMMON=$COMMON" >> $GITHUB_ENV
           echo "DEFCONFIG=$DEFCONFIG" >> $GITHUB_ENV
+          echo "PATCH_DIR_NAME=$PATCH_DIR_NAME" >> $GITHUB_ENV
           
       - name: Extract all tar.xz files and delete them
         run: |
