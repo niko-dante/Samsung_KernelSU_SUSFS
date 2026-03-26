@@ -81,6 +81,14 @@ jobs:
           SUSFS4KSU="$ROOT/susfs4ksu"
           KERNEL_PATCHES="$ROOT/kernel_patches"
           ANYKERNEL3="$ROOT/AnyKernel3"
+          # --- REDIRECTION LOGIC ---
+          # We tell the script: "If it's X800, use the 901E patch folder instead"
+          if [[ "${{ inputs.branch }}" == "SM-X800-Oneui8" ]]; then
+            PATCH_DIR_NAME="SM-S901E-Oneui8"
+          else
+            PATCH_DIR_NAME="${{ inputs.branch }}"
+          fi
+          # -------------------------
           if [[ "${{ inputs.branch }}" == "SM-A546B-Oneui7" || "${{ inputs.branch }}" == "SM-A546E-Oneui7" || "${{ inputs.branch }}" == "SM-M146B-Oneui7-ADYJ2" ]]; then  
             COMMON="$CONFIG"
           elif [[ "${{ inputs.branch }}" == "SM-A566B" ]]; then
@@ -184,7 +192,7 @@ jobs:
           # Apply SUSFS core patch
           patch -p1 < 50_add_susfs_in_gki-${{ inputs.android_version }}-${{ inputs.kernel_version }}.patch || true
           rm -rf 50_add_susfs_in_gki-${{ inputs.android_version }}-${{ inputs.kernel_version }}.patch
-          cp "$KERNEL_PATCHES/samsung/${{ inputs.branch }}/"* ./
+          cp "$KERNEL_PATCHES/samsung/$PATCH_DIR_NAME/"* ./
 
           # Fix SUSFS rejects
           for p in *.patch; do
