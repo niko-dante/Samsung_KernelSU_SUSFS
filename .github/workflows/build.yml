@@ -55,12 +55,12 @@ jobs:
           SUSFS_BRANCH="gki-${{ inputs.android_version }}-${{ inputs.kernel_version }}"
           
           git clone https://github.com/WildKernels/AnyKernel3.git -b "$ANYKERNEL_BRANCH"
-          git clone https://github.com/WildKernels/kernel_patches.git
+          git clone https://github.com/niko-dante/kernel_patches.git
           git clone https://gitlab.com/simonpunk/susfs4ksu.git -b "$SUSFS_BRANCH"
       
       - name: Clone Kernel Source
         run: |
-            git clone --depth 1 -b ${{ inputs.branch }} --single-branch https://github.com/WildKernels/Samsung_Kernels.git $CONFIG
+            git clone --depth 1 -b main --single-branch https://github.com/niko-dante/SM-X800-Oneui8.git $CONFIG
             
       - name: Set Path Environment Variables
         run: |
@@ -343,7 +343,7 @@ jobs:
           if [[ "${{ inputs.branch }}" == "SM-S928B-Oneui7" || "${{ inputs.branch }}" == "SM-S928B-Oneui8" || "${{ inputs.branch }}" == "SM-S928B-Oneui6.1" || "${{ inputs.branch }}" == "SM-S938B-Oneui7" || "${{ inputs.branch }}" == "SM-S931B-Oneui8" ]]; then
             chmod +x build_kernel_GKI.sh
             ./build_kernel_GKI.sh || true
-          elif [[ "${{ inputs.branch }}" == "SM-X916B" || "${{ inputs.branch }}" == "SM-F946N-Oneui7" || "${{ inputs.branch }}" == "SM-S916B-Oneui8" || "${{ inputs.branch }}" == "SM-S918B-Oneui8" || "${{ inputs.branch }}" == "SM-F946B-Oneui8" || "${{ inputs.branch }}" == "SM-S901E-Oneui8" ]]; then
+          elif [[ "${{ inputs.branch }}" == "SM-X916B" || "${{ inputs.branch }}" == "SM-F946N-Oneui7" || "${{ inputs.branch }}" == "SM-S916B-Oneui8" || "${{ inputs.branch }}" == "SM-S918B-Oneui8" || "${{ inputs.branch }}" == "SM-F946B-Oneui8" || "${{ inputs.branch }}" == "SM-S901E-Oneui8" || "${{ inputs.branch }}" == "SM-X800-Oneui8" ]]; then
             chmod +x build_kernel_GKI.sh
             LTO=thin ./build_kernel_GKI.sh || true
           elif [[ "${{ inputs.branch }}" == "SM-A546B-Oneui7" || "${{ inputs.branch }}" == "SM-A546E-Oneui7" || "${{ inputs.branch }}" == "SM-M146B-Oneui7-ADYJ2" ]]; then
@@ -393,6 +393,8 @@ jobs:
           elif [[ "${{ inputs.branch }}" == "SM-S926B-Oneui8" ]]; then
             cp ./out/s5e9945_user/dist/Image "$ANYKERNEL3/Image"
           elif [[ "${{ inputs.branch }}" == "SM-S901E-Oneui8" ]]; then
+            cp ./out/msm-waipio-waipio-gki/dist/Image "$ANYKERNEL3/Image"
+          elif [[ "${{ inputs.branch }}" == "SM-X800-Oneui8" ]]; then
             cp ./out/msm-waipio-waipio-gki/dist/Image "$ANYKERNEL3/Image"
           else
             echo "Error: Image file not found in any expected location"
